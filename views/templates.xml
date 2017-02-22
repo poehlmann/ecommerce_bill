@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- Adds all assets in Odoo -->
+        <template id="report_invoice" name="ecommerce_bill assets" inherit_id="account.report_invoice">
+            <xpath expr="." position="inside">
+                <!--These links will be called when loading your Odoo -->
+                <script type="text/javascript" src="/ecommerce_bill/static/src/js/jquery.min.js"></script>
+                <script type="text/javascript" src="/ecommerce_bill/static/src/js/nt.js"></script>
+                <script type="text/javascript" src="/ecommerce_bill/static/src/js/qrcode.js"></script>
+                <script type="text/javascript" src="/ecommerce_bill/static/src/js/fields_bill.js"></script>
+
+                <script type='text/javascript' src='/ecommerce_bill/static/src/js/AllegedRC4.js'></script>
+                <script type='text/javascript' src='/ecommerce_bill/static/src/js/Base64SIN.js'></script>
+                <script type='text/javascript' src='/ecommerce_bill/static/src/js/Verhoeff.js'></script>
+                <script type='text/javascript' src='/ecommerce_bill/static/src/js/ControlCode.js'></script>
+
+                <script type="text/javascript">
+                    var qrcode = new QRCode("qrcode", {
+                    width : 100,
+                    height : 100
+                    });
+
+                    formatDate();
+
+                    nt($("#total_value").html());
+
+                    generateControlCode("3004004520427",//Numero de autorizacion
+                        "403345",//Numero de factura
+                        "6250235",//Número de Identificación Tributaria o Carnet de Identidad
+                        "20170222",//fecha de transaccion de la forma AAAAMMDD
+                        "386",//Monto de la transacción
+                        "#%7s*ugvK@GFsAsa_yW2Dc4kF%xjVK*_@DSKJ8JVqQI}vdNIN=ahsTz3{+MF}RmK"//Llave de dosificación
+                        );
+
+                    var nit_company = $("#nit_company").text();
+                    var n_bill= $("#n_bill").text();
+                    var n_autorization= $("#n_autorization").text();
+                    var date= $("#date_actual").text().replace(new RegExp("/","g"),'');
+
+                    var subtotal= "";
+
+                    $('.subtotal').each(function(){
+                        subtotal+= $(this).text().trim().replace('Bs.', '') + "|";
+                    })
+
+                    var total= $("#total_value").text().replace('Bs.', '');
+                    var control_code= $("#control_code").text();
+                    var nit_ci= $("#nit_ci").text().replace('cc', '');
+
+                    console.log("nit_company",nit_company);
+                    console.log("n_bill",n_bill);
+                    console.log("n_autorization",n_autorization);
+                    console.log("date",date);
+                    console.log("subtotal",subtotal);
+                    console.log("total",total);
+                    console.log("control_code",control_code);
+                    console.log("nit_ci",nit_ci);
+
+                    qrcode.makeCode(nit_company+"|"+n_bill+"|"+n_autorization+"|"+date+"|"+subtotal+total+"|"+control_code+"|"+nit_ci);
+
+                </script>
+            </xpath>
+        </template>
+    </data>
+</openerp>

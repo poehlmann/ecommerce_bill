@@ -1,0 +1,182 @@
+<openerp>
+    <data>
+        <template id="report_header_custom" inherit_id="report.external_layout_header">
+            <xpath expr="//div[@class='header']" position="replace">
+                <div class ="header">
+                    <div class="row" style="display: -webkit-inline-box;">
+                        <div class="col-sm-6" style="width:50%">
+                            <div class="row">
+                                <div class="col-sm-12" align="center">
+                                    <strong>"REDESK"</strong>
+                                </div>
+                                <div class="col-sm-12" align="center">
+                                    <strong>INGENIERIA EN HELPDESK, REDES Y TELECOMUNICACIONES.De Juan Pablo Vargas Soruco</strong>
+                                </div>
+                                <div class="col-sm-12" align="center">
+                                    <strong>Casa Matriz</strong>
+                                </div>
+                                <div class="col-sm-12" align="center">
+                                    <strong>Calle Caritas Nro. 13</strong>
+                                </div>
+                                <div class="col-sm-12" align="center">
+                                    <strong>Zona/Barrio: El Deber Uv 0116 Mza 01+</strong>
+                                </div>
+                                <div class="col-sm-12" align="center">
+                                    <strong>Telf: 3276719-77342968</strong>
+                                </div>
+                                <div class="col-sm-12" align="center">
+                                    <strong>Santa Cruz - Bolivia</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6" style="width:50%">
+                            <div class="row" align="right" style="border-style:groove;background-color: cornsilk;">
+                                <div style="padding-bottom: 10px;padding-top: 10px;">
+                                    <strong style="margin-right:24%">NIT:</strong>
+                                    <span id="nit_company" style="margin-right:14%">3862918016</span>
+                                </div>
+                                <div style="padding-bottom: 10px;padding-top: 10px;">
+                                    <strong style="margin-right:38%">FACTURA N°:</strong>
+                                    <span id="n_bill" style="color:red;margin-right:14%" >11</span>
+                                </div>
+                                <div style="padding-bottom: 10px;padding-top: 10px;">
+                                    <strong style="margin-right:15%">AUTORIZACION N°:</strong>
+                                    <span id="n_autorization" style="margin-right:14%">467601600008752</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+
+
+        <template id="report_invoice_document">
+            <t t-call="report.external_layout">
+                <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
+                <div class="page">
+                    <div class="row">
+                        <div class="col-md-12" align="center">
+                            <strong style="font-size: xx-large;">FACTURA</strong>
+                        </div>
+                    </div>
+                    <div class="row" style="border-style: groove;display: -webkit-box;background-color: cornsilk;">
+                        <div class="row" style="width:50%">
+                            <div style="padding-bottom: 10px;padding-top: 10px;">
+                                <strong style="margin-left: 10%;margin-right: 10%;">Lugar:</strong>
+                                <label>SANTA CRUZ DE LA SIERRA, </label><label id="date_actual"></label>
+                            </div>
+                            <div style="padding-bottom: 10px;padding-top: 10px;">
+                                <strong style="margin-left: 10%;margin-right: 7%;">Señor(es)</strong>
+                                <span t-if="o.partner_id.name" style="font-style:initial;text-transform: uppercase;"><span style="font-style:initial" t-field="o.partner_id.name"/></span>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-left: 10%;width:50%;">
+                            <div style="padding-bottom: 10px;padding-top: 10px;">
+                                <strong style="margin-left: 10%;margin-right: 7%;">NIT/CI:</strong>
+                                <!--<address style="display: -webkit-inline-box;font-style:initial;text-transform: uppercase;" t-field="o.partner_id"-->
+                                         <!--t-field-options='{"fields": ["vat"]}' />-->
+                                <span id="nit_ci" t-if="o.partner_id.vat" style="font-style:initial;text-transform: uppercase;"><span style="font-style:initial" t-field="o.partner_id.vat"/></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <t t-set="display_discount" t-value="any([l.discount for l in o.invoice_line_ids])"/>
+
+                    <table class="table table-bordered" style="width:100%">
+                        <thead style="background-color: lightsteelblue;">
+                            <tr>
+                                <th>Detalle</th>
+                                <th t-if="display_discount" class="text-right" groups="sale.group_discount_per_so_line">
+                                    Disc.(%)
+                                </th>
+                                <th class="text-right">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody class="invoice_tbody" style="background-color: lavender;">
+                            <tr t-foreach="o.invoice_line_ids" t-as="l">
+                                <td>
+                                    <span t-field="l.name"/>
+                                </td>
+                                <td class="text-right subtotal">
+                                    <span t-field="l.price_subtotal"
+                                          t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="row">
+                        <div class="col-xs-4 pull-right">
+                            <table class="table table-condensed" style="width:100%">
+                                <tbody>
+                                    <tr class="border-black" style="background-color: rgb(230, 230, 250)">
+                                        <td align="right" style="width: 60.6%;">
+                                            <strong>Total</strong>
+                                        </td>
+                                        <td align="right">
+                                            <span id="total_value" t-field="o.amount_total"
+                                                  t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div style="padding-bottom: 20px;background-color: rgb(230, 230, 250);width:100%">
+                        <label>Son: </label><label id="number_to_word"></label> <label>00/100 BOLIVIANOS</label>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <template id="report_footer_custom" inherit_id="report.external_layout_footer">
+            <xpath expr="//div[@class='footer']" position="replace">
+                <div class ="footer" style="padding-top: 50px;">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <strong>Codigo de Control:</strong>
+                            <span id="control_code" style="margin-left: 15%;"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4 ">
+                            <strong >Fecha Limite de emision:</strong>
+                            <span style="margin-left: 12%;">04/01/2017</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12" align="right">
+                            <div id="qrcode" style="width:100px; height:100px; margin-top:15px;"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12" align="center">
+                            <span>ESTA FACTURA CONTRIBUYE AL DESARROLLO DEL PAIS, EL USO ILICITO DE ESTA SERA SANCIONADO
+                                DE
+                                ACUERDO A LA LEY
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12" align="center">
+                            <strong>Ley N°453: Tienes derecho a un trato equitativo sin discriminacion en la oferta de
+                                servicios
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+
+        <template id="report_invoice_bill" inherit_id="account.report_invoice">
+            <t t-call="report.html_container" position="replace">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="ecommerce_bill.report_invoice_document" t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</openerp>

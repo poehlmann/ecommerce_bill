@@ -1,0 +1,30 @@
+<!--<openerp>-->
+    <!--<data>-->
+        <!--&lt;!&ndash;  &ndash;&gt;-->
+        <!--&lt;!&ndash;   <record id="object0" model="ecommerce_bill.ecommerce_bill"> &ndash;&gt;-->
+        <!--&lt;!&ndash;     <field name="name">Object 0</field> &ndash;&gt;-->
+        <!--&lt;!&ndash;     <field name="value">0</field> &ndash;&gt;-->
+        <!--&lt;!&ndash;   </record> &ndash;&gt;-->
+        <!--&lt;!&ndash;  &ndash;&gt;-->
+        <!--&lt;!&ndash;   <record id="object1" model="ecommerce_bill.ecommerce_bill"> &ndash;&gt;-->
+        <!--&lt;!&ndash;     <field name="name">Object 1</field> &ndash;&gt;-->
+        <!--&lt;!&ndash;     <field name="value">10</field> &ndash;&gt;-->
+        <!--&lt;!&ndash;   </record> &ndash;&gt;-->
+        <!--&lt;!&ndash;  &ndash;&gt;-->
+        <!--&lt;!&ndash;   <record id="object2" model="ecommerce_bill.ecommerce_bill"> &ndash;&gt;-->
+        <!--&lt;!&ndash;     <field name="name">Object 2</field> &ndash;&gt;-->
+        <!--&lt;!&ndash;     <field name="value">20</field> &ndash;&gt;-->
+        <!--&lt;!&ndash;   </record> &ndash;&gt;-->
+        <!--&lt;!&ndash;  &ndash;&gt;-->
+        <!--&lt;!&ndash;   <record id="object3" model="ecommerce_bill.ecommerce_bill"> &ndash;&gt;-->
+        <!--&lt;!&ndash;     <field name="name">Object 3</field> &ndash;&gt;-->
+        <!--&lt;!&ndash;     <field name="value">30</field> &ndash;&gt;-->
+        <!--&lt;!&ndash;   </record> &ndash;&gt;-->
+        <!--&lt;!&ndash;  &ndash;&gt;-->
+        <!--&lt;!&ndash;   <record id="object4" model="ecommerce_bill.ecommerce_bill"> &ndash;&gt;-->
+        <!--&lt;!&ndash;     <field name="name">Object 4</field> &ndash;&gt;-->
+        <!--&lt;!&ndash;     <field name="value">40</field> &ndash;&gt;-->
+        <!--&lt;!&ndash;   </record> &ndash;&gt;-->
+        <!--&lt;!&ndash;  &ndash;&gt;-->
+    <!--</data>-->
+<!--</openerp>-->
